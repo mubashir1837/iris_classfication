@@ -3,40 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Iris Classification</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        
+        .container {
+           
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h2 class="mt-5">Iris Classification</h2>
+<body class="bg-gradient-to-r from-blue-500 to-yellow-600">
+    <div class="container bg-blue-300 mt-5">
+        <h2 class="text-2xl font-extrabold text-center mt-5 mb-5 text-4xl text-[#1fff]">Iris Classification</h2>
         {% if error_message %}
-        <div class="alert alert-danger" role="alert">
+        <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
             {{ error_message }}
         </div>
         {% endif %}
         <form action="/predict" method="post">
-            <div class="form-group">
-                <label for="sepal_length">Sepal Length</label>
-                <input type="number" step="any" class="form-control" id="sepal_length" name="sepal_length" required>
+            <div class="mb-4">
+                <label for="sepal_length" class="block text-gray-700">Sepal Length</label>
+                <input type="number" step="any" class="form-input mt-1 block w-full" id="sepal_length" name="sepal_length" required>
             </div>
-            <div class="form-group">
-                <label for="sepal_width">Sepal Width</label>
-                <input type="number" step="any" class="form-control" id="sepal_width" name="sepal_width" required>
+            <div class="mb-4">
+                <label for="sepal_width" class="block text-gray-700">Sepal Width</label>
+                <input type="number" step="any" class="form-input mt-1 block w-full" id="sepal_width" name="sepal_width" required>
             </div>
-            <div class="form-group">
-                <label for="petal_length">Petal Length</label>
-                <input type="number" step="any" class="form-control" id="petal_length" name="petal_length" required>
+            <div class="mb-4">
+                <label for="petal_length" class="block text-gray-700">Petal Length</label>
+                <input type="number" step="any" class="form-input mt-1 block w-full" id="petal_length" name="petal_length" required>
             </div>
-            <div class="form-group">
-                <label for="petal_width">Petal Width</label>
-                <input type="number" step="any" class="form-control" id="petal_width" name="petal_width" required>
+            <div class="mb-4">
+                <label for="petal_width" class="block text-gray-700">Petal Width</label>
+                <input type="number" step="any" class="form-input mt-1 block w-full" id="petal_width" name="petal_width" required>
             </div>
-            <button type="submit" class="btn btn-primary">Predict</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Predict</button>
         </form>
         {% if prediction_text %}
         <div class="mt-3">
-            <h5>Prediction:</h5>
-            <p>{{ prediction_text }}</p>
+            <h5 class="text-lg font-bold">Prediction:</h5>
+            <p class="mt-1 text-gray-800">{{ prediction_text }}</p>
         </div>
         {% endif %}
     </div>
