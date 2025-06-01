@@ -5,9 +5,7 @@
     <title>Iris Classification</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        
         .container {
-           
             padding: 2rem;
             border-radius: 0.5rem;
             max-width: 600px;
@@ -17,12 +15,14 @@
 </head>
 <body class="bg-gradient-to-r from-blue-500 to-yellow-600">
     <div class="container bg-blue-300 mt-5">
-        <h2 class="text-2xl font-extrabold text-center mt-5 mb-5 text-4xl text-[#1fff]">Iris Classification</h2>
+        <h2 class="text-4xl font-extrabold text-center mb-5 text-[#1fff]">Iris Classification</h2>
+
         {% if error_message %}
         <div class="bg-red-100 text-red-800 p-4 rounded mb-4">
             {{ error_message }}
         </div>
         {% endif %}
+
         <form action="/predict" method="post">
             <div class="mb-4">
                 <label for="sepal_length" class="block text-gray-700">Sepal Length</label>
@@ -42,10 +42,10 @@
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Predict</button>
         </form>
+
         {% if prediction_text %}
-        <div class="mt-3">
-            <h5 class="text-lg font-bold">Prediction:</h5>
-            <p class="mt-1 text-gray-800">{{ prediction_text }}</p>
+        <div class="mt-5 p-4 bg-green-100 rounded text-green-900">
+            <strong>Prediction:</strong> {{ prediction_text }}
         </div>
         {% endif %}
     </div>
