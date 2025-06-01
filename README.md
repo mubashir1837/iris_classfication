@@ -1,12 +1,11 @@
 # Iris flower classification
 
-Welcome to my project of machine learningr.
-
 <div align="center">
   <br />
-    <!-- <a href="https://mubashir-a.vercel.app" target="_blank"> -->
+  
+  
       <img src="./templates/img/iris.PNG" alt="Project Banner">
-    <!-- </a> -->
+
   <br />
 
 ## About Me
