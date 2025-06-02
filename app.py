@@ -4,14 +4,14 @@ import numpy as np
 
 app = Flask(__name__)
 
-# Load the model and class names
-model_path = 'iris_model.pkl'  # Ensure this path is correct
+# Load model and class names from pickle
+model_path = 'iris_model.pkl'
 with open(model_path, 'rb') as model_file:
     model, class_names = pickle.load(model_file)
 
-# Check if the loaded model has a predict method
+# Ensure model has predict method
 if not hasattr(model, 'predict'):
-    raise AttributeError("The loaded model does not have a 'predict' method.")
+    raise AttributeError("Loaded model does not support prediction.")
 
 @app.route('/')
 def index():
@@ -20,21 +20,23 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        sepal_length = float(request.form['sepal_length'])
-        sepal_width = float(request.form['sepal_width'])
-        petal_length = float(request.form['petal_length'])
-        petal_width = float(request.form['petal_width'])
+        # Get form values
+        sepal_length = float(request.form.get('sepal_length'))
+        sepal_width = float(request.form.get('sepal_width'))
+        petal_length = float(request.form.get('petal_length'))
+        petal_width = float(request.form.get('petal_width'))
 
+        # Prepare input array
         features = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
-        predicted_class_index = model.predict(features)[0]
-        predicted_class_name = class_names[predicted_class_index]
-        prediction_text = f'The predicted iris species is: {predicted_class_name}'
+        prediction = model.predict(features)[0]
 
-        return render_template('index.html', prediction_text=prediction_text)
+        # Map prediction index to class name
+        predicted_class = class_names[prediction]
+        return render_template('index.html', prediction_text=f"Predicted Iris Species: {predicted_class}")
 
     except Exception as e:
-        error_message = f"An error occurred: {str(e)}"
-        return render_template('index.html', error_message=error_message)
+        return render_template('index.html', error_message=f"Error: {str(e)}")
 
+# Use gunicorn or Azure’s default server in production
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
