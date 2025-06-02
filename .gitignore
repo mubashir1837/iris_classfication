@@ -1,0 +1,12 @@
+venv
+*.h5
+*.ckpt
+*.csv
+*.zip
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+antenv/
+venv/
